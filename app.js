@@ -1,9 +1,8 @@
 const morgan = require("morgan");
 const express = require("express");
 const htmlTemplateTag = require("html-template-tag");
-const layout = require("./views/layout");
 const wiki = require("./routes/wiki");
-const user = require("./routes/user");
+// const user = require("./routes/user");
 const {
     db,
     Page,
@@ -29,11 +28,12 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use('/wiki', wiki);
+// app.use('/users', user);
 
 app.get('/', (req, res) => {
-    res.send(layout(''));
-    db.authenticate().
-    then(() => {
-        console.log('connected to the database');
-    });
+    // db.authenticate().
+    // then(() => {
+    //     console.log('connected to the database');
+    // });
+    res.redirect('/wiki');
 });
