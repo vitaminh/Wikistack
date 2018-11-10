@@ -1,9 +1,8 @@
 const morgan = require("morgan");
 const express = require("express");
 const htmlTemplateTag = require("html-template-tag");
-const wiki = require("./routes/wiki");
-const { main } = require('./views');
-// const user = require("./routes/user");
+const wiki = require('./routes/wiki');
+const user = require('./routes/user');
 const {
     db,
     Page,
@@ -29,7 +28,7 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use('/wiki', wiki);
-// app.use('/users', user);
+app.use('/users', user);
 
 app.get('/', (req, res) => {
     res.redirect('/wiki');

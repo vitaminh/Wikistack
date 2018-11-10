@@ -28,10 +28,6 @@ const Page = db.define('page', {
   }
 });
 
-Page.beforeValidate((instance, options) => {
-  instance.slug = generateSlug(instance.title);
-});
-
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
@@ -45,6 +41,16 @@ const User = db.define('user', {
     }
   }
 });
+
+// Hooks
+
+Page.beforeValidate((instance, options) => {
+  instance.slug = generateSlug(instance.title);
+});
+
+// Relations / Associations
+
+Page.belongsTo(User, { as: 'author' });
 
 module.exports = {
   db, Page, User
