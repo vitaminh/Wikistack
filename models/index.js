@@ -4,6 +4,11 @@ const db = new Sequelize('postgres://localhost:5432/wikistack', {
   logging: false
 });
 
+function generateSlug(title) {
+  // remove all non-alphanumeric chars from title and convert whitespace to underscores
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+}
+
 const Page = db.define('page', {
   title: {
     type: Sequelize.STRING,
@@ -12,9 +17,6 @@ const Page = db.define('page', {
   slug: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-        isAlphanumeric: true
-    }
   },
   content: {
     type: Sequelize.TEXT,
@@ -24,6 +26,10 @@ const Page = db.define('page', {
     type: Sequelize.ENUM('open', 'closed'),
     defaultValue: 'open'
   }
+});
+
+Page.beforeValidate((instance, options) => {
+  instance.slug = generateSlug(instance.title);
 });
 
 const User = db.define('user', {

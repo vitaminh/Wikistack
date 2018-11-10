@@ -12,14 +12,12 @@ router.post('/', async (req, res, next) => {
     // res.json(req.body);
     const page = new Page({
         title: req.body.title,
-        slug: req.body.title,
         content: req.body.pagecontent,
-        // status (automatically set)
     });
     try {
         await page.save(); //returns promise
         res.redirect('/');
-    } catch(err) {
+    } catch (err) {
         next(err);
     }
 });
