@@ -2,6 +2,7 @@ const morgan = require("morgan");
 const express = require("express");
 const htmlTemplateTag = require("html-template-tag");
 const wiki = require("./routes/wiki");
+const { main } = require('./views');
 // const user = require("./routes/user");
 const {
     db,
@@ -16,7 +17,7 @@ const app = express();
 const syncMe = (async () => {
     await Page.sync();
     await User.sync();
-    await db.sync({ force: true }); //overwrites??
+    await db.sync({ force: false }); // force option overwrites
 })();
 
 app.listen(PORT, () => {
@@ -31,9 +32,5 @@ app.use('/wiki', wiki);
 // app.use('/users', user);
 
 app.get('/', (req, res) => {
-    // db.authenticate().
-    // then(() => {
-    //     console.log('connected to the database');
-    // });
     res.redirect('/wiki');
 });
