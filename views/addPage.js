@@ -30,17 +30,10 @@ module.exports = () => layout(html`
     <div>
       <label for="content" class="col-sm-2 control-label">Page Content</label>
       <div class="col-sm-10">
-        <input id="content" name="content" type="text" class="form-control"/>
+        <textarea id="content" name="content" class="form-control" rows="10" cols="80" placeholder="Enter content here" wrap="soft">
+        </textarea>
       </div>
     </div>
-    <!-- status section removed
-      <div>
-        <label for="status" class="col-sm-2 control-label">Page Status</label>
-        <div class="col-sm-10">
-          <input id="status" name="status" type="text" class="form-control"/>
-        </div>
-      </div>
-    -->
 
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">submit</button>

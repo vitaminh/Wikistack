@@ -3,6 +3,7 @@ const router = express.Router();
 const { userList, userPages } = require('../views');
 const { Page, User } = require('../models');
 
+// display list of all users
 router.get('/', async (req, res, next) => {
     try {
         const users = await User.findAll();
@@ -10,6 +11,7 @@ router.get('/', async (req, res, next) => {
     } catch (error) { next(error) }
 });
 
+// view single user
 router.get('/:userId', async (req, res, next) => {
     try {
         const user = await User.findById(req.params.userId);
